@@ -1,14 +1,10 @@
 #Import random library to gerenate random sensor data
-import random as rand
-
 #Import Json Library to be used to write sensor data in a file
-import json
-
 #Import date time and time library to add date time to sensor data when saving in file
-import datetime
-import time
-
 #Import logging module to create error logs
+import random as rand
+import json
+import datetime
 import logging
 
 #create a dictionary to handle sensor data
@@ -21,7 +17,7 @@ for i in range(32):
     #Generate 16 random sensor data for every sensor cluster
 
     #custom names for sensor readings
-    #sensor_cluster[i] = { 'sensor'+str(n): [rand.random()] for n in range(16)}
+    #sensor_cluster[i] = { 'sensor_'+str(n): [rand.random()] for n in range(16)}
 
     sensor_cluster[i] = { n : [rand.random()] for n in range(16)}
 
@@ -47,11 +43,6 @@ with open("e://Dev//summative_assesment//venv//sensor_data.txt", "a") as f:
 corrupt_sensor_cluster = dict()
 for i in range(32):
     #Generate 16 random sensor data for every sensor cluster
-    # if i%2 == 0:
-    #     corrupt_sensor_cluster[i] = { n : [rand.random()] for n in range(16)}
-    # else:
-    #     corrupt_sensor_cluster[i] = { n: "err" for n in range(16) if n%2 == 0}
-    #     corrupt_sensor_cluster[i] = { n: [rand.random()] for n in range(16)}
     corrupt_sensor_cluster[i] = { n : [rand.random()] for n in range(16)}
     for val in corrupt_sensor_cluster[i]:
         if val%2 == 0:
@@ -70,6 +61,6 @@ def err_check():
                 logging.debug("Sensor {} from cluster {} is having an error".format(key,clusters))
 
             #updating an error to a unique integer
-            sensor_readings.update({val : 10})
+            #sensor_readings.update({val : 10})
             print (key,value)
 err_check()
