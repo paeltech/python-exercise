@@ -8,6 +8,9 @@ import json
 import datetime
 import time
 
+#Import logging module to create error logs
+import logging
+
 #create a dictionary to handle sensor data
 sensor_cluster = dict()
 
@@ -57,11 +60,16 @@ for i in range(32):
 
 #create a function that checks for errors from sensor data
 def err_check():
+    #Configuring error logs
+    logging.basicConfig(filename='error.log', level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
+    #Checking for errors in sensor readings
     for clusters, sensor_readings in corrupt_sensor_cluster.items():
         print("\n\nsensor readings for  cluster {}".format(clusters))
         for key, value in sensor_readings.items():
             if value == "err":
-                print("there are errors in sensor {}".format(key))
-            else:
-                print(key,value)
+                logging.debug("Sensor {} from cluster {} is having an error".format(key,clusters))
+
+            #updating an error to a unique integer
+            sensor_readings.update({val : 10})
+            print (key,value)
 err_check()
