@@ -5,7 +5,7 @@ sensor_cluster = dict()
 
 #create dummy sensor data
 #32 entries
-for i in range(3):
+for i in range(32):
     sensor_data = rand.random()
     #Generate 16 random sensor data for every sensor cluster
     sensor_cluster[i] = { n: [rand.random()] for n in range(16+1)}
